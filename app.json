@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "sorBurgers-app",
-    "slug": "sorBurgers-app",
+    "name": "sorBurgers-Empleado",
+    "slug": "sorBurgers-Empleado",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
