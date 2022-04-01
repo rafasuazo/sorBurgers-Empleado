@@ -28,6 +28,9 @@ export default function MenuPrincipal({navigation}){
                 <View style={styles.buttons}>
                     <Button title="Empleados" onPress={() => navigation.navigate('EmpleadosStack')}/>
                 </View>
+                <View style={styles.buttons}>
+                    <Button title="Clientes" onPress={() => navigation.navigate('ClientesStack')}/>
+                </View>
             </View>
         </View>
     )

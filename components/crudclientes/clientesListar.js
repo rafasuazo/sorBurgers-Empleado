@@ -3,14 +3,14 @@ import { StyleSheet, View, Text, FlatList,Button, TextInput, Alert, Image} from 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const ip = require('../../ip/ip');
 
-export default function ListarEmpleados({navigation}){
+export default function ListarClientes({navigation}){
 
     const [info, setInfo] = useState([]);
     const [ejecucion, setEjecucion] = useState(null);
 
     if(ejecucion==null){
         try {
-            const response = fetch(ip.ip + "empleados/", {
+            const response = fetch(ip.ip + "clientes/", {
                 method: 'GET',
             })
             .then((response) => response.json())
@@ -28,14 +28,14 @@ export default function ListarEmpleados({navigation}){
     }
 
     const pressCancel = async () => {
-        navigation.navigate('EmpleadosMenu');
+        navigation.navigate('ClientesMenu');
     }
 
     return(
         <View style={styles.contenedor}>
-            <View style={styles.contendorempleados}>
+            <View style={styles.contendorclientes}>
                 <View style={styles.contenedortitulo}>
-                    <Text style={styles.titulo}>Lista de Empleados</Text>
+                    <Text style={styles.titulo}>Lista de Clientes</Text>
                 </View>
                 <View style={styles.flat}>
                     <FlatList numColumns={2} columnWrapperStyle={{justifyContent:"space-between"}}
@@ -48,16 +48,11 @@ export default function ListarEmpleados({navigation}){
                                         <Image style={{flex:1, resizeMode:"cover",width: 100, height:90,}} source={require("../../assets/empleado.png")}
                                         />
                                     </View>
-                                    <Text ># de Empleado: {item.id}</Text>
+                                    <Text ># de Cliente: {item.id}</Text>
                                     <Text >Nombre: {item.nombre}</Text>
                                     <Text >Apellido: {item.apellido}</Text>
                                     <Text >Telefono: {item.telefono}</Text>
                                     <Text >Fecha de Nacimiento: {item.fechaNacimiento}</Text>
-                                   <View style={styles.buttonContainer}>
-                                        <View style={styles.button}>
-                                            <Button title="Modificar" onPress={() => navigation.navigate("EmpleadosModificar", {id: item.id})}/>
-                                        </View>
-                                    </View>
                                 </View>
                             )
                         }}    
@@ -66,7 +61,7 @@ export default function ListarEmpleados({navigation}){
                 </View>    
                 <View style={styles.buttonContainer}>
                     <View style={styles.button}>
-                        <Button title="Cancelar" onPress={pressCancel} />
+                        <Button title="Regresar" onPress={pressCancel} />
                     </View>
                 </View>
             </View>
@@ -88,7 +83,7 @@ const styles = StyleSheet.create({
         paddingHorizontal:5,
         marginHorizontal:2
     },
-    contendorempleados: {
+    contendorclientes: {
         backgroundColor: '#111B1E',
         justifyContent: 'flex-start',
         marginTop: 10,

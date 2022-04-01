@@ -6,6 +6,7 @@ import ProveedoresStack from "./proveedoresStack";
 import PuestosStack from "./puestosStack";
 import IngredientesStack from "./ingredientesStack";
 import EmpleadosStack from "./empleadosStack";
+import ClientesStack from "./clientesStack";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ export default function CrudStack(){
             <Stack.Screen name="PuestosStack" component={PuestosStack}/>
             <Stack.Screen name="IngredientesStack" component={IngredientesStack}/>
             <Stack.Screen name="EmpleadosStack" component={EmpleadosStack}/>
+            <Stack.Screen name="ClientesStack" component={ClientesStack}/>
         </Stack.Navigator>
     )
 }
