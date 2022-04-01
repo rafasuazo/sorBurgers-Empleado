@@ -6,7 +6,7 @@ export default function MenuPrincipal({navigation}){
     return(
         <View style={styles.container}>
             <View style={styles.titleContainer}>
-                <Text style={styles.title}>CRUD de Productos</Text>
+                <Text style={styles.title}>CRUDS Administrativos</Text>
                 <Text style={styles.subtitle}>De click a la opcion que desea realizar</Text>
             </View>
             <View style={styles.buttonContainer}>
@@ -24,6 +24,9 @@ export default function MenuPrincipal({navigation}){
                 </View>
                 <View style={styles.buttons}>
                     <Button title="Ingredientes" onPress={() => navigation.navigate('IngredientesStack')}/>
+                </View>
+                <View style={styles.buttons}>
+                    <Button title="Empleados" onPress={() => navigation.navigate('EmpleadosStack')}/>
                 </View>
             </View>
         </View>
