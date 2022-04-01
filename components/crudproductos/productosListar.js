@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const ip = require('../../ip/ip');
 
 export default function ListarProductos({navigation}){
-    const terms = "Al usar SorBurgers-app acepta nuestros términos y condiciones."; 
+
     const [info, setInfo] = useState([]);
     const [ejecucion, setEjecucion] = useState(null);
 
@@ -69,9 +69,6 @@ export default function ListarProductos({navigation}){
                     <View style={styles.button}>
                         <Button title="Cancelar" onPress={pressCancel} />
                     </View>
-                </View>
-                <View style={styles.terms}>
-                    <Text style={{color: "#E4D8D9", textAlign: "center"}}>{terms}</Text>
                 </View>
             </View>
         </View>

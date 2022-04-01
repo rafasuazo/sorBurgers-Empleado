@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, View, Text, TextInput, Button, Alert} from "react-native";
 
 export default function Recetas({navigation}){
-    const terms = "Al usar SorBurgers-app acepta nuestros términos y condiciones."; 
 
     return(
         <View style={styles.container}>
@@ -20,9 +19,6 @@ export default function Recetas({navigation}){
                         <Button title=" Guardar Recetas  " onPress={() => navigation.navigate('RecetasGuardar')}/>
                     </View>
                 </View>
-                    <View style={styles.terms}>
-                            <Text style={{color: "#E4D8D9", textAlign: "center", padding: 80}}>{terms}</Text>
-                    </View>
             </View>
         </View>
 

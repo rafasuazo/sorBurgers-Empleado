@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { StyleSheet, View, Text, TextInput, Button, Alert } from "react-native";
 import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
+const ip = require('../ip/ip');
 
 export default function RegistroCliente({navigation}){
 
@@ -43,8 +44,7 @@ export default function RegistroCliente({navigation}){
 
             try{
 
-                const respuesta = await fetch(
-                    'http://192.168.0.9:3003/api/clientes/guardar',
+                const respuesta = await fetch(ip.ip + "empleados/guardar",
                     {
                         method: 'POST',
                         headers:{
@@ -52,6 +52,7 @@ export default function RegistroCliente({navigation}){
                             'Content-Type': "application/json"
                         },
                         body: JSON.stringify({
+                            puestoId: 1,
                             nombre: nombre,
                             apellido: apellido,
                             telefono: telefono,

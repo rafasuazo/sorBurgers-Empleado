@@ -6,7 +6,6 @@ export default function EliminarReceta ({route, navigation}) {
     
     const {id}= route.params; 
 
-    const terms = "Al usar SorBurgers-app acepta nuestros términos y condiciones."; 
     const [descripcion, setDescripcion] = useState('');
     
     const [ejecucion, setEjecucion] = useState(null);
@@ -74,10 +73,6 @@ export default function EliminarReceta ({route, navigation}) {
                         </View>
                     </View>
                    
-                </View>
-
-                <View style={styles.terms}>
-                    <Text style={{color: "#E4D8D9", textAlign: "center"}}>{terms}</Text>
                 </View>
             </View>
         </View>

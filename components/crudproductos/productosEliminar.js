@@ -5,8 +5,6 @@ const ip = require('../../ip/ip');
 export default function EliminarProducto ({route, navigation}) {
     
     const {id}= route.params; 
-
-    const terms = "Al usar SorBurgers-app acepta nuestros términos y condiciones."; 
     const [nombre, setNombre] = useState('');
     const [descripcionProducto, setDescripcionProducto] = useState('');
     const [precio, setPrecio] = useState(0.00);
@@ -84,10 +82,6 @@ export default function EliminarProducto ({route, navigation}) {
                         </View>
                     </View>
                    
-                </View>
-
-                <View style={styles.terms}>
-                    <Text style={{color: "#E4D8D9", textAlign: "center"}}>{terms}</Text>
                 </View>
             </View>
         </View>

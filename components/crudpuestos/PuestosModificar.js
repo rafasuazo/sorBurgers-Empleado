@@ -11,7 +11,6 @@ export default function ModificarPuestos({route, navigation}){
     const {id}= route.params; 
     // hooks
     const [descripcion, setDescripcion] = useState('');
-    const terms = "Al usar SorBurgers-app acepta nuestros términos y condiciones."; 
     const [ejecucion, setEjecucion] = useState(null);
     if(ejecucion==null){
         try {
@@ -91,10 +90,6 @@ export default function ModificarPuestos({route, navigation}){
                         </View>
                     </View>
                    
-                </View>
-
-                <View style={styles.terms}>
-                    <Text style={{color: "#E4D8D9", textAlign: "center"}}>{terms}</Text>
                 </View>
             </View>
         </View>

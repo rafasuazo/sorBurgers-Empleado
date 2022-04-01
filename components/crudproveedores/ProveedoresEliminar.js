@@ -6,7 +6,6 @@ export default function EliminarProveedores ({route, navigation}) {
     
     const {id}= route.params; 
 
-    const terms = "Al usar SorBurgers-app acepta nuestros términos y condiciones."; 
     const [nombreProveedor, setnombreProveedor] = useState('');
     const [empresa, setempresa] = useState('');
     const [direccion, setdireccion] = useState('');
@@ -85,10 +84,6 @@ export default function EliminarProveedores ({route, navigation}) {
                         </View>
                     </View>
                    
-                </View>
-
-                <View style={styles.terms}>
-                    <Text style={{color: "#E4D8D9", textAlign: "center"}}>{terms}</Text>
                 </View>
             </View>
         </View>

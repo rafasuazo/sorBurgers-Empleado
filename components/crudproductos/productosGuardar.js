@@ -12,8 +12,6 @@ export default function GuardarProducto({navigation}){
     const [precio, setPrecio] = useState('');
     const [recetumId, setRecetumId] = useState('');
 
-    const terms = "Al usar SorBurgers-app acepta nuestros términos y condiciones."; 
-
     const [info, setInfo] = useState([]);
     const [ejecucion, setEjecucion] = useState(null);
 
@@ -128,10 +126,6 @@ export default function GuardarProducto({navigation}){
                     </View>
                    
                 </View>
-
-                <View style={styles.terms}>
-                    <Text style={{color: "#E4D8D9", textAlign: "center"}}>{terms}</Text>
-                </View>
             </View>
         </View>
     )
@@ -151,7 +145,7 @@ const styles = StyleSheet.create({
         width: "100%",
         alignItems: "center",
         justifyContent: "flex-start",
-        paddingTop: "15%"
+        paddingTop: "10%"
     },
     titleContainer:{
         padding: 25,

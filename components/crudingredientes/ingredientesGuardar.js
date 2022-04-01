@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import { StyleSheet, View, Text, TextInput, Button, Alert} from "react-native";
 import {Picker} from '@react-native-picker/picker';
-import AsyncStorage from "@react-native-async-storage/async-storage";
 const ip = require('../../ip/ip');
 
 export default function GuardarIngrediente({navigation}){
@@ -12,30 +11,6 @@ export default function GuardarIngrediente({navigation}){
     const [precioCompra, setPrecioCompra] = useState('');
     const [cantidad, setCantidad] = useState('');
     const [proveedoreId, setProveedoreId] = useState('');
-
-    const terms = "Al usar SorBurgers-app acepta nuestros términos y condiciones."; 
-
-    const [info, setInfo] = useState([]);
-    const [ejecucion, setEjecucion] = useState(null);
-
-    if(ejecucion==null){
-        try {
-            const response = fetch(ip.ip + "proveedores/", {
-                method: 'GET',
-            })
-            .then((response) => response.json())
-            .then((json) => {
-                    setInfo(json);
-                    console.log(info);   
-                });  
-            setEjecucion(false);
-        } 
-        catch (error) {
-            setEjecucion(false);
-            console.error(error);
-        }
-        setEjecucion(false);  
-    }
 
     const pressHandler = async () => {
         if(nombre.length <= 0 || descripcion.length <=0 || precioCompra.length <= 0 || cantidad.length <= 0 ){
@@ -139,10 +114,6 @@ export default function GuardarIngrediente({navigation}){
                         </View>
                     </View>
                    
-                </View>
-
-                <View style={styles.terms}>
-                    <Text style={{color: "#E4D8D9", textAlign: "center"}}>{terms}</Text>
                 </View>
             </View>
         </View>

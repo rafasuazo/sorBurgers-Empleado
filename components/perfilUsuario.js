@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
 import { ActivityIndicator, StyleSheet, Text, View, Button, Image, TextInput, TouchableOpacity, Alert } from "react-native";
-import logo from "../assets/icon.png";
 import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import * as ImagePicker from "expo-image-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+const ip = require("../ip/ip");
 
 export default function Inicio({navigation}){    
 
@@ -15,7 +15,6 @@ export default function Inicio({navigation}){
     const [fechaNacimiento, setFechaNacimiento] = useState('');
     const [fecha, setFecha] = useState(new Date());
     const [isLoading, setLoading] = useState(true);
-    const [editable, setEditable] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const [filename, setFilename] = useState('');
 
@@ -40,12 +39,12 @@ export default function Inicio({navigation}){
         showMode('date');
     };
 
-    // sacar los datos del cliente en el asyncStorage
-    const getCliente = async () => {
+    // sacar los datos del empleado en el asyncStorage
+    const getEmpleado = async () => {
 
-        let cliente = JSON.parse(await AsyncStorage.getItem('cliente'));
+        let empleado = JSON.parse(await AsyncStorage.getItem('empleado'));
 
-        if(!cliente){
+        if(!empleado){
             console.log("Usuario no autenticado");
             setId(null)
         }
@@ -53,16 +52,13 @@ export default function Inicio({navigation}){
 
             try{
                 
-                console.log(cliente.info.cliente);
-                setId(cliente.info.cliente.id);
-    
-                await fetch('http://192.168.0.9:3003/api/clientes/editar?id=' + id);
-                setNombre(cliente.info.cliente.nombre);
-                setApellido(cliente.info.cliente.apellido);
-                setTelefono(cliente.info.cliente.telefono);
-                setFechaNacimiento(cliente.info.cliente.fechaNacimiento);
-                setFilename(cliente.info.cliente.imagen);
-                console.log(filename);
+                console.log(empleado);
+                setId(empleado.id);
+                setNombre(empleado.nombre);
+                setApellido(empleado.apellido);
+                setTelefono(empleado.telefono);
+                setFechaNacimiento(empleado.fechaNacimiento);
+                setFilename(empleado.imagen);
             }
             catch(err){
                 console.log(err);
@@ -75,7 +71,7 @@ export default function Inicio({navigation}){
 
     // este será para cargar la información del cliente
     useEffect(() => {
-        getCliente();
+        getEmpleado();
     }, []);
 
     // pressHandler para hacer la modificación
@@ -87,8 +83,7 @@ export default function Inicio({navigation}){
         else{
 
             try{
-                const respuesta = await fetch(
-                    'http://192.168.0.9:3003/api/clientes/modificar?id=' + id,
+                const respuesta = await fetch(ip.ip + "clientes/modificar?id=" + id,
                     {
                         method: 'PUT',
                         headers:{
@@ -169,7 +164,7 @@ export default function Inicio({navigation}){
 
         try{
 
-            const respuesta = await fetch('http://192.168.0.9:3003/api/archivos/?id=' + id, 
+            const respuesta = await fetch(ip.ip + "archivos/?id=" + id, 
             {
                 method: 'POST',
                 headers:{
@@ -180,20 +175,29 @@ export default function Inicio({navigation}){
             });
 
             const json = await respuesta.json();
-            console.log(json);
+            let cliente = JSON.parse(await AsyncStorage.getItem('cliente'));
+            await AsyncStorage.setItem('cliente', JSON.stringify(cliente), 
+            () => {
+                AsyncStorage.mergeItem('cliente', JSON.stringify(json.id))
+            })
         }
         catch(err){
             console.log(err);
         }
     }
 
-    const uri = 'http://192.168.0.9:3003/usuario/img/' + filename;    
+    const uri = 'http://192.168.0.9:3003/usuario/img/' + filename;
     return(
         <View style={styles.container}>
             <View style={styles.presentationContainer}>
                 <View style={styles.presentation}>
-                    <View style={styles.imageContainer}>   
-                    <Image source={{uri: uri}} style={styles.image}/>
+                    <View style={styles.imageContainer}>
+
+                        {selectedImage ? (
+                            <Image source={{uri: selectedImage.localUri}} style={styles.image}/>
+                        ) : (
+                            <Image source={{uri: uri}} style={styles.image}/>
+                        )}
                         <TouchableOpacity onPress={openImagePicker}>
                             <Text style={styles.textoImagen}>Cambiar imagen</Text>
                         </TouchableOpacity>
@@ -213,7 +217,6 @@ export default function Inicio({navigation}){
                         
                         style={styles.comings}
                         defaultValue={nombre}
-                        editable={editable}
                         onChangeText={(val) => setNombre(val)}
                         />
 
@@ -222,7 +225,6 @@ export default function Inicio({navigation}){
                         
                         style={styles.comings}
                         defaultValue={apellido}
-                        editable={editable}
                         onChangeText={(val) => setApellido(val)}
                         />
 
@@ -231,7 +233,6 @@ export default function Inicio({navigation}){
                         
                         style={styles.comings}
                         defaultValue={telefono}
-                        editable={editable}
                         onChangeText={(val) => setTelefono(val)}
                         keyboardType={"phone-pad"}
                         />
@@ -242,12 +243,13 @@ export default function Inicio({navigation}){
 
                     <View style={styles.buttonContainer}>
                         <View style={styles.button}>
-                            <Button title="Editar" onPress={() => setEditable(true)}/>
-                        </View>
-
-                        <View style={styles.button}>
                             <Button title="Guardar" onPress={pressHandler}/>
                         </View>
+                        
+                        <View style={styles.button}>
+                            <Button title="Cancelar" onPress={() => navigation.goBack()}/>
+                        </View>
+
                     </View>
                 </View>
             )}
@@ -264,6 +266,7 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     presentationContainer: {
+        marginTop: 15,
         width: "100%",
         height: 180,
         alignItems: "center",
@@ -280,7 +283,8 @@ const styles = StyleSheet.create({
     image:{
         height: 120,
         width: 120,
-        borderRadius: 100
+        borderRadius: 100,
+        backgroundColor: "#E4DBD9"
     },
     textoImagen:{
         color: "#E4DBD9",

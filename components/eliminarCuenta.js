@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { StyleSheet, View, Text, TextInput, Button, ActivityIndicator, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+const ip = require("../ip/ip");
 
 export default function EliminarCuenta({navigation}){
 
@@ -12,12 +13,13 @@ export default function EliminarCuenta({navigation}){
     const [fechaNacimiento, setFechaNacimiento] = useState('');
     const [correo, setCorreo] = useState('');
     const [isLoading, setLoading] = useState(true);
+    const [mostrar, setMostrar] = useState(true);
 
-    const getCliente = async () => {
+    const getEmpleado = async () => {
 
-        let cliente = JSON.parse(await AsyncStorage.getItem('cliente'));
+        let empleado = JSON.parse(await AsyncStorage.getItem('userEmpleado'));
 
-        if(!cliente){
+        if(!empleado){
             console.log("Usuario no autenticado");
             setId(null)   
         }
@@ -25,13 +27,12 @@ export default function EliminarCuenta({navigation}){
 
             try{
 
-                setId(cliente.info.cliente.id)            
-                await fetch('http://192.168.0.9:3003/api/clientes/editar?id=' + id);
-                setNombre(cliente.info.cliente.nombre);
-                setApellido(cliente.info.cliente.apellido);
-                setTelefono(cliente.info.cliente.telefono);
-                setFechaNacimiento(cliente.info.cliente.fechaNacimiento);
-                setCorreo(cliente.info.correo);
+                setId(empleado.info.empleado.id);
+                setNombre(empleado.info.empleado.nombre);
+                setApellido(empleado.info.empleado.apellido);
+                setTelefono(empleado.info.empleado.telefono);
+                setFechaNacimiento(empleado.info.empleado.fechaNacimiento);
+                setCorreo(empleado.info.correo);
             }   
             catch(err){
                 console.log(err);
@@ -43,14 +44,14 @@ export default function EliminarCuenta({navigation}){
     }
     
     useEffect(() => {
-        getCliente();
+        getEmpleado();
     }, [])
 
     const pressDelete = async () => {
 
         try{
 
-            const respuesta = await fetch('http://192.168.0.183:3003/api/usuarios/eliminar?id=' + id,
+            const respuesta = await fetch(ip.ip + "usuarios/eliminar?id=" + id,
             {
                 method: 'DELETE',
                 headers:{
@@ -62,12 +63,32 @@ export default function EliminarCuenta({navigation}){
             const json = await respuesta.json();
             console.log(json);
 
+            setMostrar(false);
             Alert.alert("SorBurgers", json.msj);
             navigation.navigate('Login');
         }
         catch(err){
             console.log(err);
         }
+    }
+
+    // dialogo para confirmar la eliminacion de la cuenta dku
+    const pressConfirm = () => {
+
+        return Alert.alert(
+            "Eliminación de cuenta SorBurgers",
+            "¿Estás seguro que quieres eliminar tu cuenta?",
+            [
+                {
+                    text: "Sí",
+                    onPress: () => pressDelete()
+                },
+                {
+                    text: "No",
+                    style: "cancel"
+                }
+            ]
+        )
     }
 
     return(
@@ -123,8 +144,15 @@ export default function EliminarCuenta({navigation}){
                     </View>
 
                     <View style={styles.buttonContainer}>
+
+                        {!mostrar ? true : (
+                            <View style={styles.button}>
+                                <Button title="Eliminar" onPress={pressConfirm}/>
+                            </View>
+                        )}
+
                         <View style={styles.button}>
-                            <Button title="Eliminar" onPress={pressDelete}/>
+                            <Button title="Cancelar" onPress={() => navigation.goBack()}/>
                         </View>
                     </View>
 

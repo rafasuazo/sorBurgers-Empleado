@@ -13,9 +13,6 @@ export default function GuardarProveedores({navigation}){
     const [telefono, settelefono] = useState('');
     const [correo, setcorreo] = useState('');
 
-    const terms = "Al usar SorBurgers-app acepta nuestros términos y condiciones."; 
-
-
     const pressHandler = async () => {
         if(nombreProveedor.length <= 0 || empresa.length <=0 || direccion.length <= 0 || telefono.length <= 0|| correo.length <= 0){
             Alert.alert("SorBurgers", "Todos los campos son requeridos");
@@ -112,10 +109,6 @@ export default function GuardarProveedores({navigation}){
                         </View>
                     </View>
                    
-                </View>
-
-                <View style={styles.terms}>
-                    <Text style={{color: "#E4D8D9", textAlign: "center"}}>{terms}</Text>
                 </View>
             </View>
         </View>

@@ -1,40 +1,59 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image, BackHandler, Alert } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import logo from "../assets/SorBurgers.jpg";
 
-export default function Inicio({navigation}){    
+export default function Inicio({navigation}){ 
+    
+    const pressConfirm = () => {
+
+        return Alert.alert(
+            "Cerrar sesión",
+            "¿Estás seguro que quieres salir de la aplicación?",
+            [
+                {
+                    text: "Sí",
+                    onPress: () => BackHandler.exitApp()
+                },
+                {
+                    text: "No",
+                    style: "cancel"
+                }
+            ],
+        )
+    }
     
     return(
         <View style={styles.container}>
-            <View style={styles.logoContainer}>
-                <Text style={{color: "#000"}}>Aquí iría el logo de SorBurgers</Text>
-            </View>
+            <View style={styles.imgContainer}>
+                    <Image source={logo} style={styles.image}/>
+                </View>
 
             <View style={styles.optionsContainer}>
                 <View style={styles.options}>
-                    <Text style={styles.text}>Mi perfil</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('Perfil')}>
+                    <TouchableOpacity style={styles.touch} onPress={() => navigation.navigate('Perfil')}>
+                        <Text style={styles.text}>Mi perfil</Text>
                         <MaterialCommunityIcons name="face" color="#E4DBD9" size={32}/>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.options}>
-                    <Text style={styles.text}>Mi cuenta</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('MiCuenta')}>
+                    <TouchableOpacity style={styles.touch} onPress={() => navigation.navigate('MiCuenta')}>
+                        <Text style={styles.text}>Mi cuenta</Text>
                         <MaterialCommunityIcons name="account" color="#E4DBD9" size={32}/>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.options}>
-                    <Text style={styles.text}>Eliminar mi cuenta</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('EliminarCuenta')}>
+                    <TouchableOpacity style={styles.touch} onPress={() => navigation.navigate('EliminarCuenta')}>
+                        <Text style={styles.text}>Eliminar mi cuenta</Text>
                         <MaterialCommunityIcons name="trash-can" color="#E4DBD9" size={32}/>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.options}>
-                    <Text style={styles.text}>Salir</Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity style={styles.touch} onPress={pressConfirm}>
+                        <Text style={styles.text}>Salir</Text>
                         <MaterialCommunityIcons name="logout" color="#E4DBD9" size={32}/>
                     </TouchableOpacity>
                 </View>
@@ -50,22 +69,32 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "flex-start"
     },
-    logoContainer:{
-        marginTop: "15%",
-        backgroundColor: "#E4DBD9",
+    imgContainer:{
+        marginTop: "5%",
         padding: 20,
+        backgroundColor: "#fff",
         borderRadius: 10,
-        height: 140,
+        height: 180,
         width: 310,
-        marginBottom: "10%",
+        marginBottom: "5%",
         alignItems: "center",
         justifyContent: "center"
+    },
+    image:{
+        height: 200,
+        width: 200,
+        borderRadius: 10,
+        resizeMode: "contain"
     },
     optionsContainer:{
         flex: 1,
         width: "100%",
         paddingHorizontal: "12%",
         paddingTop: "10%",
+    },
+    touch:{
+        flex: 1,
+        flexDirection: "row"
     },
     options:{
         flexDirection: "row",

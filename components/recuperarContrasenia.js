@@ -1,9 +1,11 @@
 import React, {useState} from "react";
 import { StyleSheet, View, TextInput, Text,  Button, Alert, TouchableWithoutFeedback, Keyboard } from "react-native";
+const ip = require('../ip/ip');
 
 export default function RecuperarContrasenia({navigation}){
 
     // hooks
+    const [id, setId] = useState('');
     const [correo, setCorreo] = useState('');
     const [pin, setPin] = useState('');
     const [contrasenia, setContrasenia] = useState('');
@@ -22,8 +24,7 @@ export default function RecuperarContrasenia({navigation}){
 
             try{
 
-                const respuesta = await fetch(
-                    'http://192.168.0.9:3003/api/autenticacion/recuperarContrasenia',
+                const respuesta = await fetch(ip.ip + "autenticacion/recuperarContrasenia",
                     {
                         method: 'POST',
                         headers:{
@@ -46,6 +47,7 @@ export default function RecuperarContrasenia({navigation}){
 
                     setBool(true);
                     setEditable(true);
+                    setId(json.id);
                 }
             }
             catch(err){
@@ -58,8 +60,7 @@ export default function RecuperarContrasenia({navigation}){
 
         if(bool){
             try{
-                const recuperacion = await fetch(
-                    'http://192.168.0.183:3003/api/autenticacion/comprobarPin?id=1',
+                const respuesta = await fetch(ip.ip + "/autenticacion/comprobarPin?id="+ id,
                 {
                     method: 'PUT',
                     headers:{
@@ -73,7 +74,7 @@ export default function RecuperarContrasenia({navigation}){
                     })
                 });
 
-                const res = await recuperacion.json();
+                const res = await respuesta.json();
                 console.log(res);
 
                 if(res.msj === "Las contraseñas no son iguales"){

@@ -1,23 +1,42 @@
 import React, {useState, useEffect} from "react";
-import { StyleSheet, View, Text, TextInput, Button, Image, Alert } from "react-native";
-import logo from "../assets/icon.png"
+import { StyleSheet, View, Text, TextInput, Button, Image, Alert, ActivityIndicator } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import logo from "../assets/SorBurgers.jpg";
+const ip = require("../ip/ip");
 
-export default function MiCuenta(){
+export default function MiCuenta({navigation}){
 
     // hooks
+    const [id, setId] = useState('');
     const [correo, setCorreo] = useState('');
     const [contrasenia, setContrasenia] = useState('');
     const [confirmar, setConfirmar] = useState('');
     const [isLoading, setLoading] = useState(true);
-    const [editable, setEditable] = useState(false);
 
     // extraer datos de la api
     const getUsuario = async () => {
 
         try{
-            const response = await fetch('http://192.168.0.9:3003/api/usuarios/editar?id=1')
-            const json = await response.json();
-            setCorreo(json.Usuario.correo);
+            
+            let usuario = JSON.parse(await AsyncStorage.getItem('userEmpleado'));
+
+            if(!usuario){
+                console.log("No existe el usuario");
+                setId(null);
+            }
+            else{
+
+                try{
+                    setCorreo(usuario.info.correo);
+                    setId(usuario.info.empleadoId);
+                }
+                catch(err){
+                    console.log(err);
+                }
+                finally{
+                    setLoading(false);
+                }
+            }
         }
         catch(err){
             console.log(err);
@@ -36,7 +55,7 @@ export default function MiCuenta(){
 
         try{
 
-            const respuesta = await fetch('http://192.168.0.183:3003/api/usuarios/modificar/cliente?id=1',
+            const respuesta = await fetch(ip.ip + "usuarios/modificar/empleado?id=" + id,
             {
                 method: 'PUT',
                 headers:{
@@ -65,9 +84,9 @@ export default function MiCuenta(){
                 }
                 else{
 
-                    //navigation.navigate('MenuPerfil');
+                    navigation.navigate('MenuPerfil');
                     Alert.alert("SorBurgers", json.msj);
-                    setEditable(false);
+                    navigation.navigate('Login');
                 }
             }
         }
@@ -84,56 +103,58 @@ export default function MiCuenta(){
                 </View>
             </View>
 
-            <View style={styles.controlContainer}>
-                <View style={styles.form}>
-                    <Text style={styles.labelForm}>Correo</Text>
-                    <TextInput
-                    
-                    style={styles.comings}
-                    defaultValue={correo}
-                    editable={editable}
-                    onChangeText={(val) => setCorreo(val)}
-                    autoCapitalize={'none'}
-                    />
+            {isLoading ? <ActivityIndicator /> :
+            (
+                <View style={styles.controlContainer}>
+                    <View style={styles.form}>
+                        <Text style={styles.labelForm}>Correo</Text>
+                        <TextInput
+                        
+                        style={styles.comings}
+                        defaultValue={correo}
+                        onChangeText={(val) => setCorreo(val)}
+                        autoCapitalize={'none'}
+                        />
 
-                    <Text style={styles.labelForm}>Contraseña</Text>
-                    <TextInput
-                    
-                    style={styles.comings}
-                    defaultValue={contrasenia}
-                    editable={editable}
-                    placeholder="Contraseña"
-                    placeholderTextColor={"#E4DBD9"}
-                    autoCapitalize={'none'}
-                    secureTextEntry={true}
-                    passwordRules=''
-                    onChangeText={(val) => setContrasenia(val)}
-                    />
+                        <Text style={styles.labelForm}>Contraseña</Text>
+                        <TextInput
+                        
+                        style={styles.comings}
+                        defaultValue={contrasenia}
+                        placeholder="Contraseña"
+                        placeholderTextColor={"#E4DBD9"}
+                        autoCapitalize={'none'}
+                        secureTextEntry={true}
+                        passwordRules=''
+                        onChangeText={(val) => setContrasenia(val)}
+                        />
 
-                    <Text style={styles.labelForm}>Confirmar Contraseña</Text>
-                    <TextInput
-                    
-                    style={styles.comings}
-                    editable={editable}
-                    placeholder="Confirmar contraseña"
-                    placeholderTextColor={"#E4DBD9"}
-                    autoCapitalize={'none'}
-                    secureTextEntry={true}
-                    passwordRules=''
-                    onChangeText={(val) => setConfirmar(val)}
-                    />
-                </View>
-
-                <View style={styles.buttonContainer}>
-                    <View style={styles.button}>
-                        <Button title="Editar" onPress={() => setEditable(true)}/>
+                        <Text style={styles.labelForm}>Confirmar Contraseña</Text>
+                        <TextInput
+                        
+                        style={styles.comings}
+                        placeholder="Confirmar contraseña"
+                        placeholderTextColor={"#E4DBD9"}
+                        autoCapitalize={'none'}
+                        secureTextEntry={true}
+                        passwordRules=''
+                        onChangeText={(val) => setConfirmar(val)}
+                        />
                     </View>
 
-                    <View style={styles.button}>
-                        <Button title="Guardar" onPress={pressHandler}/>
+                    <View style={styles.buttonContainer}>
+                        <View style={styles.button}>
+                            <Button title="Guardar" onPress={pressHandler}/>
+                        </View>
+
+                        <View style={styles.button}>
+                            <Button title="Cancelar" onPress={() => navigation.goBack()}/>
+                        </View>
+
                     </View>
                 </View>
-            </View>
+            )}
+
         </View>
     )
 }
@@ -146,21 +167,25 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start"
     },
     Account:{
+        marginTop: 10,
         width: "100%",
         height: 180,
         alignItems: "center",
         justifyContent: "center"
     },
     imgContainer:{
+        marginTop: 20,
         alignItems: "center",
         height: 350,
         width: "100%",
-        justifyContent: "center"
+        justifyContent: "center",
+        marginBottom: 10
     },
     image:{
-        height: 100,
-        width: 100,
-        borderRadius: 10
+        height: 200,
+        width: 200,
+        borderRadius: 10,
+        resizeMode: "contain"
     },
     controlContainer: {
         flex: 1,

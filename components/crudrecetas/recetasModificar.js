@@ -1,8 +1,5 @@
 import React, {useState} from "react";
 import { StyleSheet, View, Text, TextInput, Button, Alert} from "react-native";
-import {Picker} from '@react-native-picker/picker';
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useSafeAreaFrame } from "react-native-safe-area-context";
 const ip = require('../../ip/ip');
 
 
@@ -11,7 +8,6 @@ export default function ModificarReceta({route, navigation}){
     const {id}= route.params; 
     // hooks
     const [descripcion, setDescripcion] = useState('');
-    const terms = "Al usar SorBurgers-app acepta nuestros términos y condiciones."; 
     const [ejecucion, setEjecucion] = useState(null);
     if(ejecucion==null){
         try {
@@ -91,10 +87,6 @@ export default function ModificarReceta({route, navigation}){
                         </View>
                     </View>
                    
-                </View>
-
-                <View style={styles.terms}>
-                    <Text style={{color: "#E4D8D9", textAlign: "center"}}>{terms}</Text>
                 </View>
             </View>
         </View>

@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { PasswordVisibility } from '../hooks/passwordVisibility';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+const ip = require('../ip/ip');
 
 export default function Login({navigation}) {
 
   // hooks
   const [correo, setCorreo] = useState('');
   const [contrasenia, setContrasenia] = useState('');
-
-  // recibiendo el hooks que ayudará a mostrar  y/u ocultar la contraseña
-  const {passwordVisibility, rightIcon, handlePasswordVisibility} = PasswordVisibility();
 
   const terms = "Al usar SorBurgers-app acepta nuestros términos y condiciones.";
 
@@ -24,8 +20,7 @@ export default function Login({navigation}) {
 
       try{
 
-        const respuesta = await fetch(
-          'http://192.168.0.9:3003/api/autenticacion/iniciosesion',
+        const respuesta = await fetch(ip.ip + "autenticacion/sesion-empleado",
           {
             method: 'POST',
             headers:{
@@ -50,11 +45,11 @@ export default function Login({navigation}) {
         }
         else{
 
-          const token = json.id.token;
-          const cliente = JSON.stringify(json.id);
-          await AsyncStorage.setItem('cliente', cliente); // guardando info del cliente
-          await AsyncStorage.setItem("Token", token);
+          const empleado = JSON.stringify(json.id.info.empleado);
+          const userEmpleado = JSON.stringify(json.id);
           const usuario = json.msj;
+          await AsyncStorage.setItem('empleado', empleado); // guardando datos generales del empleado
+          await AsyncStorage.setItem('userEmpleado', userEmpleado); // guardando tooooda la información
           navigation.navigate('Home', {screen: 'Inicio', params: {usuario: usuario}})
         }
       }
@@ -71,7 +66,7 @@ export default function Login({navigation}) {
           <Text style={styles.title}>Log In</Text>
           
           <View style={styles.welcomeContainer}>
-            <Text style={styles.welcomeTitle}>Bienvenido a SorBurgers Restaurant</Text>
+            <Text style={styles.welcomeTitle}>SorBurgers Administrativa</Text>
           </View>
 
         </View>
@@ -95,8 +90,8 @@ export default function Login({navigation}) {
               style={styles.comings}
               placeholder="Contraseña"
               passwordRules=''
+              secureTextEntry={true}
               placeholderTextColor={"#E4DBD9"}
-              secureTextEntry={passwordVisibility}
               autoCapitalize={'none'}
               onChangeText={(val) => setContrasenia(val)}
               

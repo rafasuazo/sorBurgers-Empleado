@@ -16,7 +16,7 @@ export default function ModificarIngrediente({route, navigation}){
     const [precioCompra, setPrecioCompra] = useState(0);
     const [cantidad, setCantidad] = useState(0);
     const [proveedoreId, setProveedoreId] = useState(null);
-    const terms = "Al usar SorBurgers-app acepta nuestros términos y condiciones."; 
+    
     const [ejecucion, setEjecucion] = useState(null);
     if(ejecucion==null){
         try {
@@ -150,10 +150,6 @@ export default function ModificarIngrediente({route, navigation}){
                         </View>
                     </View>
                    
-                </View>
-
-                <View style={styles.terms}>
-                    <Text style={{color: "#E4D8D9", textAlign: "center"}}>{terms}</Text>
                 </View>
             </View>
         </View>

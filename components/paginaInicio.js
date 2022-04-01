@@ -1,11 +1,9 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import VentaStack from "../routes/ventaStack";
+import Cruds from "../routes/crudsStack";
 
 export default function Inicio({navigation}){
    
     return(
-        <VentaStack></VentaStack>
+        <Cruds />
     )
 }

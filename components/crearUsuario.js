@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { StyleSheet, View, Text, TextInput, Button, Alert } from "react-native";
+const ip = require('../ip/ip');
 
 export default function CrearUsuario({navigation}){
 
@@ -18,8 +19,7 @@ export default function CrearUsuario({navigation}){
 
             try{
 
-                const respuesta = await fetch(
-                    'http://192.168.0.9:3003/api/usuarios/guardar/cliente',
+                const respuesta = await fetch(ip.ip + "usuarios/guardar/empleado",
                     {
                         method: 'POST',
                         headers:{
@@ -66,7 +66,7 @@ export default function CrearUsuario({navigation}){
                     <Text style={styles.title}>Sign In</Text>
 
                     <View style={styles.acountContainer}>
-                        <Text style={styles.acountTitle}>Crea tu cuenta en SorBurgers Restaurant</Text>
+                        <Text style={styles.acountTitle}>Crea tu cuenta en SorBurgers Administrativo</Text>
                     </View>
                 </View>
 

@@ -5,8 +5,6 @@ const ip = require('../../ip/ip');
 export default function EliminarIngrediente({route, navigation}) {
     
     const {id}= route.params; 
-
-    const terms = "Al usar SorBurgers-app acepta nuestros términos y condiciones."; 
     const [nombre, setNombre] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [precioCompra, setPrecioCompra] = useState(0.00);
@@ -79,7 +77,7 @@ export default function EliminarIngrediente({route, navigation}) {
 
                         <TextInput style={styles.comings} editable={false} defaultValue={descripcion}/>      
                         
-                        <TextInput style={styles.comings} editable={false} defaultValue={cantidad}/>      
+                        <TextInput style={styles.comings} editable={false} defaultValue={""+cantidad}/>      
 
                     </View>    
                     <View style={styles.buttonContainer}>
@@ -88,10 +86,6 @@ export default function EliminarIngrediente({route, navigation}) {
                         </View>
                     </View>
                    
-                </View>
-
-                <View style={styles.terms}>
-                    <Text style={{color: "#E4D8D9", textAlign: "center"}}>{terms}</Text>
                 </View>
             </View>
         </View>
