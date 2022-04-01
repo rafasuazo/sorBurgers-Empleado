@@ -6,32 +6,31 @@ import { useSafeAreaFrame } from "react-native-safe-area-context";
 const ip = require('../../ip/ip');
 
 
-export default function ModificarIngrediente({route, navigation}){
+export default function ModificarEmpleado({route, navigation}){
     
-    const {id} = route.params;
+    const {id}= route.params; 
     // hooks
     const [nombre, setNombre] = useState('');
-    const [descripcion, setDescripcion] = useState('');
-    const [precioCompra, setPrecioCompra] = useState(0);
-    const [cantidad, setCantidad] = useState(0);
-    const [proveedoreId, setProveedoreId] = useState(null);
-    
+    const [apellido, setApellido] = useState('');
+    const [telefono, setTelefono] = useState('');
+    const [fechaNacimiento, setFechaNacimiento] = useState('');
+    const [puestoId, setpuestoId] = useState(null);
+
     const [ejecucion, setEjecucion] = useState(null);
     if(ejecucion==null){
         try {
-            const response = fetch(ip.ip + "ingredientes/editar?id=" + id, {
+            const response = fetch(ip.ip + "empleados/editar?id=" + id, {
                 method: 'GET',
             })
             .then((response) => response.json())
             .then((json) => {
-                    setProveedoreId(json.proveedoreId);
+                    setpuestoId(json.puestoId);
                     setNombre(json.nombre);
-                    setDescripcion(json.descripcion);
-                    setPrecioCompra(json.precioCompra);
-                    setCantidad(json.cantidad);
+                    setApellido(json.apellido);
+                    setTelefono(json.telefono);
+                    setFechaNacimiento(json.fechaNacimiento);
                     console.log(json);   
-                    parseFloat(precioCompra);
-                    parseInt(proveedoreId);
+                    parseInt(puestoId);
                 });  
             setEjecucion(false);
         } 
@@ -44,43 +43,43 @@ export default function ModificarIngrediente({route, navigation}){
 
     const pressHandler = async () => {
         
-        if(nombre.length <= 0 || descripcion.length <= 0 || precioCompra.length <= 0 || cantidad.length <= 0){
+        if(nombre.length <= 0 || apellido.length <=0 || telefono.length <= 0 ){
             Alert.alert("SorBurgers","Escriba el id a Actualizar y todos campos requeridos");
         }
         else{
             try {
-                const respuesta = await fetch(ip.ip + "ingredientes/modificar?id=" + id, {
+                const respuesta = await fetch(ip.ip + "empleados/modificar?id=" + id, {
                     method: 'PUT',
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        proveedoreId: proveedoreId,
+                        puestoId: puestoId,
                         nombre: nombre,
-                        descripcion: descripcion,
-                        precioCompra: precioCompra,
-                        cantidad: cantidad
+                        apellido: apellido,
+                        telefono: telefono,
+                        fechaNacimiento : fechaNacimiento
                     })
                 });
                 const json = await respuesta.json();
                 console.log(json);
-                Alert.alert("SorBurgers", "Producto Modificado Correctamente");
-                navigation.navigate('IngredientesMenu');
+                Alert.alert("SorBurgers", "Empleado Modificado Correctamente");
+                navigation.navigate('EmpleadosMenu');
             } catch (error) {
                 console.error(error);
             }
         }
     }
     const pressCancel = async () => {
-        navigation.navigate('IngredientesMenu');
+        navigation.navigate('EmpleadosMenu');
     }
 
      return(
         <View style={styles.container}>
             <View style={styles.signup}>
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}> Modificar un Ingrediente </Text>
+                    <Text style={styles.title}>Modificar un Empleado</Text>
                 </View>
 
                 <View style={styles.inputsContainer}>
@@ -90,7 +89,7 @@ export default function ModificarIngrediente({route, navigation}){
                         <TextInput
                         
                         style={styles.comings}
-                        placeholder="Nombre de Ingrediente"
+                        placeholder="Nombre del Empleado"
                         placeholderTextColor={"#E4DBD9"}
                         defaultValue={nombre}
                         onChangeText={(val) => setNombre(val)}
@@ -99,46 +98,30 @@ export default function ModificarIngrediente({route, navigation}){
                         <TextInput
                          
                         style={styles.comings}
-                        placeholder="Descripcion del Ingrediente"
+                        placeholder="Apellido del Empleado"
                         placeholderTextColor={"#E4DBD9"}
-                        defaultValue={descripcion}
-                        onChangeText={(val) => setDescripcion(val)}
+                        defaultValue={apellido}
+                        onChangeText={(val) => setApellido(val)}
                         />
 
                         <TextInput
                         
                         style={styles.comings}
-                        placeholder="Precio del Ingrediente"
+                        placeholder="Telefono del Empleado"
                         placeholderTextColor={"#E4DBD9"}
-                        defaultValue={''+precioCompra}
-                        onChangeText={(val) => setPrecioCompra(val)}
-                        keyboardType={"phone-pad"}
+                        defaultValue={''+telefono}
+                        onChangeText={(val) => setTelefono(val)}
                         />
 
                         <TextInput
                         
                         style={styles.comings}
-                        placeholder="Cantidad del Ingrediente"
+                        placeholder="Fecha de nacimiento"
                         placeholderTextColor={"#E4DBD9"}
-                        defaultValue={""+cantidad}
-                        onChangeText={(val) => setCantidad(val)}
-                        keyboardType={"phone-pad"}
+                        defaultValue={''+fechaNacimiento}
+                        onChangeText={(val) => setFechaNacimiento(val)}
                         />
 
-                        <Text style={styles.label}>Seleccione un Proveedor</Text>
-                        <Picker alignItems='center'
-                            selectedValue={proveedoreId}
-                            style={{ height: 50, width: 300 }}
-                            onValueChange={(itemValue) => setProveedoreId(itemValue)}
-                        >
-                            <Picker.Item label="Jetstereo" value="1" />
-                            <Picker.Item label="Intur" value="2" />
-                            <Picker.Item label="Diprova" value="3" />
-                            <Picker.Item label="La Colonia" value="4" />
-                            <Picker.Item label="Walmart" value="5" />
-                            <Picker.Item label="Nutriboom" value="6" />
-                            <Picker.Item label="Despensa Familiar" value="7"/>
-                        </Picker>
                     </View>    
                     <View style={styles.buttonContainer}>
                         <View style={styles.button}>
