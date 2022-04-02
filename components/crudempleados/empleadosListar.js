@@ -66,7 +66,7 @@ export default function ListarEmpleados({navigation}){
                 </View>    
                 <View style={styles.buttonContainer}>
                     <View style={styles.button}>
-                        <Button title="Cancelar" onPress={pressCancel} />
+                        <Button title="Regresar" onPress={pressCancel} />
                     </View>
                 </View>
             </View>

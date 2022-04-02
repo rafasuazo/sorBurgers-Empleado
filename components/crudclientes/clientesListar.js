@@ -53,6 +53,11 @@ export default function ListarClientes({navigation}){
                                     <Text >Apellido: {item.apellido}</Text>
                                     <Text >Telefono: {item.telefono}</Text>
                                     <Text >Fecha de Nacimiento: {item.fechaNacimiento}</Text>
+                                    <View style={styles.buttonContainer}>
+                                        <View style={styles.button}>
+                                            <Button title="Modificar" onPress={() => navigation.navigate("ClientesModificar", {id: item.id})}/>
+                                        </View>
+                                    </View>
                                 </View>
                             )
                         }}    
