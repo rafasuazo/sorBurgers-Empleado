@@ -48,12 +48,11 @@ export default function ListarIngrediente({navigation}){
                                         <Image style={{flex:1, resizeMode:"cover",width: 100, height:90,}} source={require("../../assets/tomate.png")}
                                         />
                                     </View>
-                                    <Text ># de Ingrediente: {item.id}</Text>
-                                    <Text ># de Proveedor: {item.proveedoreId}</Text>
-                                    <Text >Nombre: {item.nombre}</Text>
-                                    <Text >Descripcion: {item.descripcion}</Text>
-                                    <Text >Precio: {item.precioCompra}</Text>
-                                    <Text >Cantidad : {item.cantidad}</Text>
+                                    <Text style={styles.itemText}># de Proveedor: {item.proveedoreId}</Text>
+                                    <Text style={styles.itemText}>Nombre: {item.nombre}</Text>
+                                    <Text style={styles.itemText}>Descripcion: {item.descripcion}</Text>
+                                    <Text style={styles.itemText}>Precio: {item.precioCompra}</Text>
+                                    <Text style={styles.itemText}>Cantidad : {item.cantidad}</Text>
                                     <View style={styles.buttonContainer}>
                                         <View style={styles.button}>
                                             <Button title="Modificar" onPress={() => navigation.navigate("IngredientesModificar", {id: item.id})}/>
@@ -159,5 +158,10 @@ const styles = StyleSheet.create({
         height:"85%",
         flexDirection: "column",
         alignItems: "center"
+    },
+    itemText:{
+        color: "#fff",
+        fontSize: 15,
+        padding: 5
     }
 })

@@ -38,7 +38,7 @@ export default function ListarEmpleados({navigation}){
                     <Text style={styles.titulo}>Lista de Empleados</Text>
                 </View>
                 <View style={styles.flat}>
-                    <FlatList numColumns={2} columnWrapperStyle={{justifyContent:"space-between"}}
+                    <FlatList
                         data={info}
                         keyExtractor={(item) => item.id}
                         renderItem={({item}) => {
@@ -48,11 +48,10 @@ export default function ListarEmpleados({navigation}){
                                         <Image style={{flex:1, resizeMode:"cover",width: 100, height:90,}} source={require("../../assets/empleado.png")}
                                         />
                                     </View>
-                                    <Text ># de Empleado: {item.id}</Text>
-                                    <Text >Nombre: {item.nombre}</Text>
-                                    <Text >Apellido: {item.apellido}</Text>
-                                    <Text >Telefono: {item.telefono}</Text>
-                                    <Text >Fecha de Nacimiento: {item.fechaNacimiento}</Text>
+                                    <Text>Nombre: {item.nombre}</Text>
+                                    <Text>Apellido: {item.apellido}</Text>
+                                    <Text>Telefono: {item.telefono}</Text>
+                                    <Text>Fecha de Nacimiento: {item.fechaNacimiento}</Text>
                                    <View style={styles.buttonContainer}>
                                         <View style={styles.button}>
                                             <Button title="Modificar" onPress={() => navigation.navigate("EmpleadosModificar", {id: item.id})}/>
@@ -83,7 +82,7 @@ const styles = StyleSheet.create({
         fontSize:20
     },
     flat:{
-        flex:8,
+        flex: 1,
         paddingTop:1,
         paddingHorizontal:5,
         marginHorizontal:2
@@ -96,10 +95,9 @@ const styles = StyleSheet.create({
     },
     contenedortitulo: {
         padding: 25,
-        alignItems: "stretch",
+        alignItems: "center",
         backgroundColor: '#111B1E',
-        justifyContent: "center",
-        height:100
+        justifyContent: "center"
     },
     titulo: {
         backgroundColor: '#111B1E',
@@ -123,14 +121,8 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     buttonContainer:{
-        padding: 5,
-        width: "100%",
         alignItems: "center",
-        justifyContent: "center",
-        paddingBottom: "10%",
-        flexDirection: "row",
-        flexWrap: "wrap",
-        flex:1
+        justifyContent: "center"
     },
     imagen:{
         backgroundColor: "black",
@@ -151,7 +143,7 @@ const styles = StyleSheet.create({
         padding:20,
         borderRadius:10,
         backgroundColor:'#FFFFFF',
-        width: "48%",
+        width: "100%",
         height:"85%",
         flexDirection: "column",
         alignItems: "center"

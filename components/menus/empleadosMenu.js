@@ -7,7 +7,7 @@ export default function Empleados({navigation}){
         <View style={styles.container}>
             <View style={styles.contendorempleados}>
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>CRUD de Empleados</Text>
+                    <Text style={styles.title}>Información Empleados</Text>
                     <Text style={styles.subtitle}>De click a la opcion que desea realizar</Text>
                 </View>
 

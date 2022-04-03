@@ -48,18 +48,17 @@ export default function ListarProveedores({navigation}){
                                         <Image style={{flex:1, resizeMode:"cover",width: 100, height:90,}} source={require("../../assets/proveedores.jpg")}
                                         />
                                     </View>
-                                    <Text style={styles.txt}># de proveedor: {item.id}</Text>
-                                    <Text style={styles.txt}>Nombre del Proveedor: {item.nombreproveedor}</Text>
-                                    <Text style={styles.txt}>Empresa : {item.empresa}</Text>
-                                    <Text style={styles.txt}>Direccion : {item.direccion}</Text>
-                                    <Text style={styles.txt}>Telefono : {item.telefono}</Text>
-                                    <Text style={styles.txt}>Correo : {item.correo}</Text>
+                                    <Text style={styles.itemText}>Nombre del Proveedor: {item.nombreProveedor}</Text>
+                                    <Text style={styles.itemText}>Empresa: {item.empresa}</Text>
+                                    <Text style={styles.itemText}>Direccion: {item.direccion}</Text>
+                                    <Text style={styles.itemText}>Telefono: {item.telefono}</Text>
+                                    <Text style={styles.itemText}>Correo: {item.correo}</Text>
                                     <View style={styles.buttonContainer}>
                                         <View style={styles.button}>
-                                            <Button title="  Eliminar  " onPress={() => navigation.navigate("ProveedoresEliminar", {id: item.id})} />
+                                            <Button title="Modificar" onPress={() => navigation.navigate("ProveedoresModificar", {id: item.id})}/>
                                         </View>
                                         <View style={styles.button}>
-                                            <Button title="Modificar" onPress={() => navigation.navigate("ProveedoresModificar", {id: item.id})}/>
+                                            <Button title="Eliminar" onPress={() => navigation.navigate("ProveedoresEliminar", {id: item.id})} />
                                         </View>
                                     </View>
                                 </View>
@@ -151,16 +150,18 @@ const styles = StyleSheet.create({
         marginTop: 20,
         fontSize: 15,
         marginHorizontal: 1,
-        marginVertical:0.1,
+        marginVertical: 0.1,
         padding:20,
         borderRadius:10,
         backgroundColor:'#180131',
         width: "48%",
-        height:"85%",
+        height:"90%",
         flexDirection: "column",
-        alignItems: "center"
+        alignItems: "center",
     },
-    txt:{
-        color: "#FFFFFF"
+    itemText:{
+        color: "#fff",
+        fontSize: 15,
+        padding: 5
     }
 })

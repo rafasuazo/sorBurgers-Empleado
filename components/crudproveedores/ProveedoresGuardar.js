@@ -128,8 +128,7 @@ const styles = StyleSheet.create({
     signup:{
         width: "100%",
         alignItems: "center",
-        justifyContent: "flex-start",
-        paddingTop: "15%"
+        justifyContent: "flex-start"
     },
     titleContainer:{
         padding: 25,
@@ -163,11 +162,9 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     buttonContainer:{
-        padding: 10,
         width: "100%",
         alignItems: "center",
         justifyContent: "center",
-        paddingBottom: "10%",
         flexDirection: "row",
         flexWrap: "wrap"
     },
@@ -179,7 +176,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "flex-end",
         padding: 15,
-        paddingBottom: 20,
         width: "100%"
     },
     label:{

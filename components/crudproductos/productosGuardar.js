@@ -106,7 +106,7 @@ export default function GuardarProducto({navigation}){
                         <Text style={styles.label}>Seleccione una receta</Text>
                         <Picker alignItems='center'
                             selectedValue={recetumId}
-                            style={{ height: 50, width: 300 }}
+                            style={{ height: 50, width: 300, color: "#fff" }}
                             onValueChange={(itemValue) => setRecetumId(itemValue)}
                         >
                             <Picker.Item label="Receta 1" value="1" />

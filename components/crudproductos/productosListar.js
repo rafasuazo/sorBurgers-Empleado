@@ -48,9 +48,8 @@ export default function ListarProductos({navigation}){
                                         <Image style={{flex:1, resizeMode:"cover",width: 100, height:90,}} source={require("../../assets/ham.jpg")}
                                         />
                                     </View>
-                                    <Text ># de Producto: {item.id}</Text>
-                                    <Text >Nombre: {item.nombre}</Text>
-                                    <Text >Precio : {item.precio}</Text>
+                                    <Text style={styles.itemText}>Nombre: {item.nombre}</Text>
+                                    <Text style={styles.itemText}>Precio : {item.precio}</Text>
                                     <View style={styles.buttonContainer}>
                                         <View style={styles.button}>
                                             <Button title="Modificar" onPress={() => navigation.navigate("ProductosModificar", {id: item.id})}/>
@@ -155,6 +154,12 @@ const styles = StyleSheet.create({
         width: "48%",
         height:"85%",
         flexDirection: "column",
-        alignItems: "center"
+        alignItems: "center",
+        marginBottom: 5
+    },
+    itemText:{
+        color: "#fff",
+        fontSize: 15,
+        padding: 5
     }
 })

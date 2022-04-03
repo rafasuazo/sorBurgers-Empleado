@@ -94,7 +94,7 @@ export default function GuardarIngrediente({navigation}){
                         <Text style={styles.label}>Seleccione un Proveedor</Text>
                         <Picker alignItems='center'
                             selectedValue={proveedoreId}
-                            style={{ height: 50, width: 300 }}
+                            style={{ height: 50, width: 300, color: "#fff" }}
                             onValueChange={(itemValue) => setProveedoreId(itemValue)}
                         >
                             <Picker.Item label="Jetstereo" value="1" />
@@ -134,8 +134,7 @@ const styles = StyleSheet.create({
     signup:{
         width: "100%",
         alignItems: "center",
-        justifyContent: "flex-start",
-        paddingTop: "15%"
+        justifyContent: "flex-start"
     },
     titleContainer:{
         padding: 25,
@@ -149,7 +148,6 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     inputsContainer:{
-        marginTop: "5%",
         padding: 10,
         width: "100%",
         alignItems: "center",
@@ -190,7 +188,7 @@ const styles = StyleSheet.create({
     },
     label:{
         color: "#E4DBD9",
-        padding: 20,
+        marginTop: 15,
         alignItems: "stretch",
         textAlign: "left",
         fontSize: 20

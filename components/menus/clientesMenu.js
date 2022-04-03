@@ -7,7 +7,7 @@ export default function Clientes({navigation}){
         <View style={styles.container}>
             <View style={styles.contendorclientes}>
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>CRUD de Clientes</Text>
+                    <Text style={styles.title}>Información de Clientes</Text>
                     <Text style={styles.subtitle}>De click a la opcion que desea realizar</Text>
                 </View>
 

@@ -123,14 +123,8 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     buttonContainer:{
-        padding: 5,
-        width: "100%",
         alignItems: "center",
-        justifyContent: "center",
-        paddingBottom: "10%",
-        flexDirection: "row",
-        flexWrap: "wrap",
-        flex:1
+        justifyContent: "center"
     },
     imagen:{
         backgroundColor: "black",

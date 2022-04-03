@@ -1,8 +1,5 @@
 import React, {useState} from "react";
 import { StyleSheet, View, Text, TextInput, Button, Alert} from "react-native";
-import {Picker} from '@react-native-picker/picker';
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useSafeAreaFrame } from "react-native-safe-area-context";
 const ip = require('../../ip/ip');
 
 

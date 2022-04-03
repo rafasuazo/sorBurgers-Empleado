@@ -48,8 +48,7 @@ export default function ListarPuestos({navigation}){
                                         <Image style={{flex:1, resizeMode:"cover",width: 100, height:90,}} source={require("../../assets/Puestos.jpg")}
                                         />
                                     </View>
-                                    <Text ># de Puestos: {item.id}</Text>
-                                    <Text >Puestos: {item.descripcion}</Text>
+                                    <Text style={styles.itemText}>Puestos: {item.descripcion}</Text>
                                     <View style={styles.buttonContainer}>
                                         <View style={styles.button}>
                                             <Button title="Modificar" onPress={() => navigation.navigate('PuestosModificar', {id: item.id})} />
@@ -155,5 +154,10 @@ const styles = StyleSheet.create({
         height:"85%",
         flexDirection: "column",
         alignItems: "center"
+    },
+    itemText:{
+        color: "#fff",
+        fontSize: 15,
+        padding: 5
     }
 })

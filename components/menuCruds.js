@@ -41,12 +41,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#111B1E",
         alignItems: "center",
-        justifyContent: "flex-start"
+        justifyContent: "center"
     },
     titleContainer:{
         padding: 25,
-        alignItems: "stretch",
-        justifyContent: "flex-start"
+        alignItems: "center",
+        justifyContent: "center"
     },
     title:{
         color: "#E4DBD9",
@@ -60,8 +60,11 @@ const styles = StyleSheet.create({
     },
     buttonContainer:{
         flex: 1,
-        alignItems: "center",
-        justifyContent: "center"
+        alignItems: "flex-end",
+        justifyContent: "center",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        alignContent: "center"
     },
     buttons:{
         margin: 10
