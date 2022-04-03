@@ -15,8 +15,7 @@ export default function ListarClientes({navigation}){
             })
             .then((response) => response.json())
             .then((json) => {
-                    setInfo(json);
-                    console.log(info);   
+                    setInfo(json);  
                 });  
             setEjecucion(false);
         } 
@@ -83,7 +82,7 @@ const styles = StyleSheet.create({
         fontSize:20
     },
     flat:{
-        flex:8,
+        flex:1,
         paddingTop:1,
         paddingHorizontal:5,
         marginHorizontal:2
@@ -145,7 +144,7 @@ const styles = StyleSheet.create({
         padding:20,
         borderRadius:10,
         backgroundColor:'#FFFFFF',
-        width: "48%",
+        width: "80%",
         height:"85%",
         flexDirection: "column",
         alignItems: "center"
