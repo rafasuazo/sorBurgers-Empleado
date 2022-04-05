@@ -83,7 +83,7 @@ export default function Inicio({navigation}){
         else{
 
             try{
-                const respuesta = await fetch(ip.ip + "clientes/modificar?id=" + id,
+                const respuesta = await fetch(ip.ip + "empleados/modificar?id=" + id,
                     {
                         method: 'PUT',
                         headers:{
@@ -113,9 +113,20 @@ export default function Inicio({navigation}){
                         Alert.alert("SorBurgers", json.msj);
                     }
                     else{
+
+                        const data = {
+                            nombre: nombre,
+                            apellido: apellido,
+                            telefono: telefono,
+                            fechaNacimiento: fechaNacimiento
+                        }
+
+                        let empleado = JSON.parse(await AsyncStorage.getItem('empleado'));
+                        await AsyncStorage.setItem('empleado', JSON.stringify(empleado), 
+                        () => {
+                            AsyncStorage.mergeItem('empleado', JSON.stringify(data))
+                        })
                         
-                        // llamando la función para cambiar la imagen
-                        changeImage();
                         Alert.alert("SorBurgers", json.msj);
                         navigation.navigate('MenuPerfil');
                     }
@@ -127,83 +138,9 @@ export default function Inicio({navigation}){
         }
     }
 
-    // para poder seleccionar desde el teléfono
-    let openImagePicker = async () => {
-
-        let  perimissionsResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-        if(perimissionsResult.granted === false){
-            Alert.alert("SorBurgers", "Necesitamos tu permiso para acceder a la cámara");
-            return;
-        }
-
-        let pickerResult = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            allowsEditing: true
-        });
-        console.log(pickerResult);
-
-        if(pickerResult.cancelled === true){
-            return;
-        }
-
-        setSelectedImage({localUri: pickerResult.uri}); // este es para mostrarlo en un div
-        setFilename(pickerResult.uri); // este es el que se va a mandar a Nodejs
-    }
-
-    // poder cambiar la imagen de perfil
-    const changeImage = async () => {
-
-        // seteando la forma de enviar el archivo
-        const formData = new FormData();
-        formData.append("img", {
-            name: new Date() + "_img",
-            uri: filename,
-            type: 'image/jpg'
-        });
-
-        try{
-
-            const respuesta = await fetch(ip.ip + "archivos/?id=" + id, 
-            {
-                method: 'POST',
-                headers:{
-                    Accept: "application/json",
-                    'Content-Type': "multipart/form-data"
-                },
-                body: formData
-            });
-
-            const json = await respuesta.json();
-            let cliente = JSON.parse(await AsyncStorage.getItem('cliente'));
-            await AsyncStorage.setItem('cliente', JSON.stringify(cliente), 
-            () => {
-                AsyncStorage.mergeItem('cliente', JSON.stringify(json.id))
-            })
-        }
-        catch(err){
-            console.log(err);
-        }
-    }
-
-    const uri = 'http://192.168.0.9:3003/usuario/img/' + filename;
     return(
         <View style={styles.container}>
             <View style={styles.presentationContainer}>
-                <View style={styles.presentation}>
-                    <View style={styles.imageContainer}>
-
-                        {selectedImage ? (
-                            <Image source={{uri: selectedImage.localUri}} style={styles.image}/>
-                        ) : (
-                            <Image source={{uri: uri}} style={styles.image}/>
-                        )}
-                        <TouchableOpacity onPress={openImagePicker}>
-                            <Text style={styles.textoImagen}>Cambiar imagen</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-
                 <View style={styles.presentation}>
                     <Text style={styles.textoCliente}>Hola{"\n"}{nombre}{"\t"} {apellido}</Text>
                 </View>
@@ -273,28 +210,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         flexDirection: "row"
     },
-    imageContainer: {
-        height: 180,
-        width: "100%",
-        alignItems: "center",
-        justifyContent: "center",
-        paddingHorizontal: "5%"
-    },
-    image:{
-        height: 120,
-        width: 120,
-        borderRadius: 100,
-        backgroundColor: "#E4DBD9"
-    },
-    textoImagen:{
-        color: "#E4DBD9",
-        fontSize: 15,
-        fontWeight: "600",
-        paddingTop: 10
-    },
     textoCliente:{
         color: "#6E93D6",
-        fontSize: 20,
+        fontSize: 25,
         fontWeight: "700",
     },
     formContainer:{

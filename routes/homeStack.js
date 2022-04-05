@@ -22,8 +22,8 @@ export default function Navigation(){
                     <MaterialCommunityIcons
 
                     name={icons[route.name]}
-                    color={"#000"}
-                    size={24}
+                    color={"#111B1E"}
+                    size={28}
                     />
                 )
             },
@@ -40,7 +40,8 @@ export default function Navigation(){
                 )
             },
 
-            tabBarLabelStyle: { fontSize: 12}
+            tabBarShowLabel: false,
+            tabBarActiveBackgroundColor: "#E4DBD9"
         })}>
 
             <Stack.Screen options={

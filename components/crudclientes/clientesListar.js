@@ -10,7 +10,7 @@ export default function ListarClientes({navigation}){
 
     if(ejecucion==null){
         try {
-            const response = fetch(ip.ip + "clientes/", {
+            const response = fetch(ip.ip + "clientes", {
                 method: 'GET',
             })
             .then((response) => response.json())
