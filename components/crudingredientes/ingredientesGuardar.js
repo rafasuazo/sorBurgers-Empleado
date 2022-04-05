@@ -97,13 +97,11 @@ export default function GuardarIngrediente({navigation}){
                             style={{ height: 50, width: 300, color: "#fff" }}
                             onValueChange={(itemValue) => setProveedoreId(itemValue)}
                         >
-                            <Picker.Item label="Jetstereo" value="1" />
-                            <Picker.Item label="Intur" value="2" />
-                            <Picker.Item label="Diprova" value="3" />
-                            <Picker.Item label="La Colonia" value="4" />
-                            <Picker.Item label="Walmart" value="5" />
-                            <Picker.Item label="Nutriboom" value="6" />
-                            <Picker.Item label="Despensa Familiar" value="7"/>
+                            <Picker.Item label="Diprova" value="1" />
+                            <Picker.Item label="La Colonia" value="2" />
+                            <Picker.Item label="Walmart" value="3" />
+                            <Picker.Item label="Nutriboom" value="4" />
+                            <Picker.Item label="Despensa Familiar" value="5"/>
                         </Picker>
                     </View>    
                     <View style={styles.buttonContainer}>

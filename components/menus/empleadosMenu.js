@@ -13,7 +13,10 @@ export default function Empleados({navigation}){
 
                 <View style={styles.buttonContainer}>
                     <View style={styles.buttons}>
-                        <Button title="     Listar Empleados   " onPress={() => navigation.navigate('EmpleadosListar')}/>
+                        <Button title="Listar Empleados" onPress={() => navigation.navigate('EmpleadosListar')}/>
+                    </View>
+                    <View style={styles.buttons}>
+                        <Button title="Regresar" onPress={() => navigation.navigate('MenuPrincipal')}/>
                     </View>
                 </View>
             </View>

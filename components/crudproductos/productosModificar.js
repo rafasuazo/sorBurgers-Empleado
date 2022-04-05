@@ -109,20 +109,19 @@ export default function ModificarProducto({route, navigation}){
                         placeholderTextColor={"#E4DBD9"}
                         defaultValue={''+precio}
                         onChangeText={(val) => setPrecio(val)}
-                        /*keyboardType={"phone-pad"}*/
                         />
 
                         <Text style={styles.label}>Seleccione una receta</Text>
                         <Picker alignItems='center'
                             selectedValue={recetumId}
-                            style={{ height: 50, width: 300 }}
+                            style={{ height: 50, width: 300, color: "#fff" }}
                             onValueChange={(itemValue) => setRecetumId(itemValue)}
                         >
-                            <Picker.Item label="Receta 1" value="1" />
-                            <Picker.Item label="Receta 2" value="2" />
-                            <Picker.Item label="Receta 3" value="3" />
-                            <Picker.Item label="Receta 4" value="4" />
-                            <Picker.Item label="Receta 5" value="5" />
+                            <Picker.Item label="Receta Especial para Whoper Jr" value="1" />
+                            <Picker.Item label="Receta de Whoper a la Tejana" value="2" />
+                            <Picker.Item label="Receta para Whoper Jr Cheese" value="3" />
+                            <Picker.Item label="Receta Bing King Xl" value="4" />
+                            <Picker.Item label="Receta Crispy Chicken y Tocino" value="5" />
                         </Picker>
                     </View>    
                     <View style={styles.buttonContainer}>

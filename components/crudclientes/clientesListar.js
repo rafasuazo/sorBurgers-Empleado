@@ -1,6 +1,5 @@
 import React, {useState} from "react";
-import { StyleSheet, View, Text, FlatList,Button, TextInput, Alert, Image} from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StyleSheet, View, Text, FlatList,Button, Image} from "react-native";
 const ip = require('../../ip/ip');
 
 export default function ListarClientes({navigation}){
@@ -37,21 +36,20 @@ export default function ListarClientes({navigation}){
                     <Text style={styles.titulo}>Lista de Clientes</Text>
                 </View>
                 <View style={styles.flat}>
-                    <FlatList numColumns={2} columnWrapperStyle={{justifyContent:"space-between"}}
+                    <FlatList
                         data={info}
                         keyExtractor={(item) => item.id}
                         renderItem={({item}) => {
                             return(
                                 <View style={styles.item}>
                                     <View style={styles.imagen}>
-                                        <Image style={{flex:1, resizeMode:"cover",width: 100, height:90,}} source={require("../../assets/empleado.png")}
+                                        <Image style={{flex:1, resizeMode:"cover",width: 100, height:90,}} source={require("../../assets/cliente.png")}
                                         />
                                     </View>
-                                    <Text ># de Cliente: {item.id}</Text>
-                                    <Text >Nombre: {item.nombre}</Text>
-                                    <Text >Apellido: {item.apellido}</Text>
-                                    <Text >Telefono: {item.telefono}</Text>
-                                    <Text >Fecha de Nacimiento: {item.fechaNacimiento}</Text>
+                                    <Text>Nombre: {item.nombre}</Text>
+                                    <Text>Apellido: {item.apellido}</Text>
+                                    <Text>Telefono: {item.telefono}</Text>
+                                    <Text>Fecha de Nacimiento: {item.fechaNacimiento}</Text>
                                     <View style={styles.buttonContainer}>
                                         <View style={styles.button}>
                                             <Button title="Modificar" onPress={() => navigation.navigate("ClientesModificar", {id: item.id})}/>
@@ -73,6 +71,7 @@ export default function ListarClientes({navigation}){
     );
 }
 
+
 const styles = StyleSheet.create({
     contenedor: {
         backgroundColor: '#111B1E',
@@ -82,12 +81,12 @@ const styles = StyleSheet.create({
         fontSize:20
     },
     flat:{
-        flex:1,
+        flex: 1,
         paddingTop:1,
         paddingHorizontal:5,
         marginHorizontal:2
     },
-    contendorclientes: {
+    contendorempleados: {
         backgroundColor: '#111B1E',
         justifyContent: 'flex-start',
         marginTop: 10,
@@ -95,10 +94,9 @@ const styles = StyleSheet.create({
     },
     contenedortitulo: {
         padding: 25,
-        alignItems: "stretch",
+        alignItems: "center",
         backgroundColor: '#111B1E',
-        justifyContent: "center",
-        height:100
+        justifyContent: "center"
     },
     titulo: {
         backgroundColor: '#111B1E',
@@ -144,7 +142,7 @@ const styles = StyleSheet.create({
         padding:20,
         borderRadius:10,
         backgroundColor:'#FFFFFF',
-        width: "80%",
+        width: "100%",
         height:"85%",
         flexDirection: "column",
         alignItems: "center"

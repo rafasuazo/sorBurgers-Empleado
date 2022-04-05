@@ -1,8 +1,6 @@
 import React, {useState} from "react";
 import { StyleSheet, View, Text, TextInput, Button, Alert} from "react-native";
 import {Picker} from '@react-native-picker/picker';
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useSafeAreaFrame } from "react-native-safe-area-context";
 const ip = require('../../ip/ip');
 
 
@@ -128,16 +126,14 @@ export default function ModificarIngrediente({route, navigation}){
                         <Text style={styles.label}>Seleccione un Proveedor</Text>
                         <Picker alignItems='center'
                             selectedValue={proveedoreId}
-                            style={{ height: 50, width: 300 }}
+                            style={{ height: 50, width: 300, color: "#fff" }}
                             onValueChange={(itemValue) => setProveedoreId(itemValue)}
                         >
-                            <Picker.Item label="Jetstereo" value="1" />
-                            <Picker.Item label="Intur" value="2" />
-                            <Picker.Item label="Diprova" value="3" />
-                            <Picker.Item label="La Colonia" value="4" />
-                            <Picker.Item label="Walmart" value="5" />
-                            <Picker.Item label="Nutriboom" value="6" />
-                            <Picker.Item label="Despensa Familiar" value="7"/>
+                            <Picker.Item label="Diprova" value="1" />
+                            <Picker.Item label="La Colonia" value="2" />
+                            <Picker.Item label="Walmart" value="3" />
+                            <Picker.Item label="Nutriboom" value="4" />
+                            <Picker.Item label="Despensa Familiar" value="5"/>
                         </Picker>
                     </View>    
                     <View style={styles.buttonContainer}>

@@ -1,6 +1,5 @@
 import React, {useState} from "react";
-import { StyleSheet, View, Text, FlatList,Button, TextInput, Alert, Image} from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StyleSheet, View, Text, FlatList,Button, Image} from "react-native";
 const ip = require('../../ip/ip');
 
 export default function ListarEmpleados({navigation}){
